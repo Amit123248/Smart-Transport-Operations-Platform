@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #F3F3EF;
+  color: #12151A;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(18,21,26,0.045) 1px, transparent 0);
+  background-size: 22px 22px;
+}
+
+:focus-visible {
+  outline: 2px solid #FF5A1F;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: #FFE0CF;
+}
+
+/* ---------- Manifest ticket: the page's signature element ----------
+   A perforated cargo-manifest strip used for table rows / record cards.
+   The left rail color communicates status at a glance, like a shipping
+   label's colored corner tag. The dashed perforation nods to tear-off
+   manifest slips used in real dispatch offices. */
+.manifest-row {
+  position: relative;
+  background: #FFFFFF;
+  border: 1px solid #E4E2DA;
+  border-radius: 10px;
+}
+
+.manifest-rail {
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 0;
+  width: 4px;
+  border-radius: 4px 0 0 4px;
+}
+
+.manifest-perf {
+  position: relative;
+}
+.manifest-perf::before {
+  content: '';
+  position: absolute;
+  left: 14px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background-image: linear-gradient(to bottom, #D9D6CC 0 6px, transparent 6px 12px);
+  background-size: 1px 12px;
+  opacity: 0.9;
+}
+
+/* route line for trip source -> destination */
+.route-line {
+  flex: 1;
+  height: 1px;
+  background-image: linear-gradient(to right, #C7C4BA 0 6px, transparent 6px 12px);
+  background-size: 12px 1px;
+  position: relative;
+  min-width: 24px;
+}
+
+/* scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #D9D6CC; border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: #C7C4BA; }
+
+/* toast */
+.toast-wrap {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+@keyframes toast-in {
+  from { transform: translateY(8px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.toast-item { animation: toast-in 0.18s ease-out; }
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.animate-fade-in { animation: fade-in 0.15s ease-out; }
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-rise-in { animation: rise-in 0.22s cubic-bezier(0.16, 1, 0.3, 1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .toast-item, .animate-fade-in, .animate-rise-in { animation: none !important; }
+  * { transition: none !important; }
+}
